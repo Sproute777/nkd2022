@@ -8,27 +8,27 @@ class FirstTabPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ComplexListBloc, ComplexListState>(
-      builder: (context, state) {
-        switch (state.status) {
-          case ComplexStatus.failure:
-            return const Center(
-              child: Text('Error'),
-            );
-          case ComplexStatus.loading:
-            return const Center(child: CircularProgressIndicator());
-          case ComplexStatus.success:
-            return ListView.builder(
-              itemCount: state.cards.length,
+        // buildWhen: (previous, current) => previous.status != current.status,
+        builder: (context, state) {
+      // context.read<ComplexListBloc>().add(LoadComplexList());
+      switch (state.status) {
+        case ComplexStatus.failure:
+          return const Center(
+            child: Text('Error'),
+          );
+
+        case ComplexStatus.loading:
+          return const Center(child: CircularProgressIndicator());
+
+        case ComplexStatus.success:
+          var cards =
+              state.cards.where((element) => element.row == '0').toList();
+          return ListView.builder(
+              itemCount: cards.length,
               itemBuilder: (BuildContext context, int index) {
-                return state.cards[index].row == 0
-                    ? Item(
-                        id: state.cards[index].id,
-                        text: state.cards[index].text)
-                    : const SizedBox();
-              },
-            );
-        }
-      },
-    );
+                return Item(id: cards[index].id, text: cards[index].text);
+              });
+      }
+    });
   }
 }

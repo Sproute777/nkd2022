@@ -4,22 +4,25 @@ import 'hive_mixin_repository.dart';
 import '../complex.dart';
 
 class ComplexRepository with HiveMixinRepository {
-  ComplexRepository({ ApiClient? apiClient}) : _apiClient = apiClient ?? ApiClient();
+  ComplexRepository({ApiClient? apiClient})
+      : _apiClient = apiClient ?? ApiClient();
   final ApiClient _apiClient;
 
   Future<String>? get _getToken async => await Hive.box('api_box').get('token');
 
   Future<List<Card>> getCards() async {
     final token = await _getToken;
-    List<Card> _cards = [];
     if (token != null) {
       final response = await _apiClient.get(kcards, token: token);
-      response.data.forEach((element) {
-        _cards.add(Card.fromJson(element));
-      });    
-    } 
-   
-    return _cards;
+      var data = response.data as List;
+      var cards = data.map((element) {
+        var card = Card.fromJson(element);
+        return card;
+      }).toList();
+      return cards;
+    }
+
+    return <Card>[];
   }
 
   Future<int> createCard(int row, String text) async {
@@ -35,8 +38,8 @@ class ComplexRepository with HiveMixinRepository {
         },
       );
       status = response.statusCode!;
-    } 
-     return status;
+    }
+    return status;
   }
 
   Future<dynamic>? updateCard(int id, int row, int seqNum, String text) async {
@@ -52,9 +55,8 @@ class ComplexRepository with HiveMixinRepository {
         },
       );
       return response.data;
-    } 
-      return null;
-    
+    }
+    return null;
   }
 
   Future<dynamic>? deleteCard(int id) async {
@@ -62,7 +64,7 @@ class ComplexRepository with HiveMixinRepository {
     if (token != null) {
       final response = await _apiClient.delete('$kcards$id/', token: token);
       return response.data;
-    } 
-      return null;
+    }
+    return null;
   }
 }

@@ -2,7 +2,7 @@ import 'package:hive/hive.dart';
 import '../models/models.dart';
 
 class HiveMixinRepository {
-  Future<Box<Card>> get _cardBox async => await Hive.openBox<Card>('item_box');
+  Future<Box<Card>> get _cardBox async => await Hive.openBox<Card>('c_box');
 
   Future<List<Card>>? fetchHiveCards() async {
     var box = await _cardBox;
@@ -12,8 +12,8 @@ class HiveMixinRepository {
 
   Future<void> addHiveCards(List<Card> cards) async {
     var box = await _cardBox;
-    for(var card in cards) {
-     box.put(card.id ,card);
+    for (var card in cards) {
+      box.put(card.id, card);
     }
     return;
   }
@@ -35,5 +35,4 @@ class HiveMixinRepository {
     var future = box.delete(id);
     return future;
   }
-
 }

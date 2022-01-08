@@ -1,6 +1,6 @@
 part of 'complex_list_bloc.dart';
 
-enum ComplexStatus {  loading, success, failure }
+enum ComplexStatus { loading, success, failure }
 
 class ComplexListState extends Equatable {
   const ComplexListState({
@@ -13,19 +13,18 @@ class ComplexListState extends Equatable {
   final List<Card> cards;
   final ConnectivityResult connectivity;
 
- ComplexListState copyWith({
-   ComplexStatus? status,
-   List<Card>? cards,
-   ConnectivityResult? connectivity,
- }){
-   return ComplexListState(
-     status: status ?? this.status,
-     cards: cards ?? this.cards,
-     connectivity: connectivity ?? this.connectivity,
-   );
- }     
+  ComplexListState copyWith({
+    ComplexStatus? status,
+    List<Card>? cards,
+    ConnectivityResult? connectivity,
+  }) {
+    return ComplexListState(
+      status: status ?? this.status,
+      cards: cards ?? this.cards,
+      connectivity: connectivity ?? this.connectivity,
+    );
+  }
 
   @override
-  List<Object?> get props => [status, cards , connectivity ];
+  List<Object> get props => [status, cards, connectivity];
 }
-

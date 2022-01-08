@@ -11,7 +11,6 @@ void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(CardAdapter());
   await Hive.openBox('api_box');
-  await Hive.openBox('item_box');
   runApp(App(
     complexRepository: ComplexRepository(),
     authRepository: AuthRepository(),

@@ -9,6 +9,7 @@ class FourthTabPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ComplexListBloc, ComplexListState>(
       builder: (context, state) {
+        // context.read<ComplexListBloc>().add(LoadComplexList());
         switch (state.status) {
           case ComplexStatus.failure:
             return const Center(
@@ -17,16 +18,13 @@ class FourthTabPage extends StatelessWidget {
           case ComplexStatus.loading:
             return const Center(child: CircularProgressIndicator());
           case ComplexStatus.success:
+            var cards =
+                state.cards.where((element) => element.row == '3').toList();
             return ListView.builder(
-              itemCount: state.cards.length,
-              itemBuilder: (BuildContext context, int index) {
-                return state.cards[index].row == 3
-                    ? Item(
-                        id: state.cards[index].id,
-                        text: state.cards[index].text)
-                    : const SizedBox();
-              },
-            );
+                itemCount: cards.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Item(id: cards[index].id, text: cards[index].text);
+                });
         }
       },
     );

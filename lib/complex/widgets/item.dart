@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class Item extends StatelessWidget {
-  final id;
-  final text;
+  final int id;
+  final String text;
 
   const Item({
     Key? key,
@@ -12,16 +12,21 @@ class Item extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return
+        // DefaultTextStyle(
+        //   style: Theme.of(context).textTheme.bodyText1!,
+        // child  :
+        Container(
       margin: const EdgeInsets.all(8),
       decoration: BoxDecoration(
         shape: BoxShape.rectangle,
-        color: Colors.grey[800],
+        color: Colors.blueGrey[700],
       ),
       child: ListTile(
         title: Text('ID $id', style: const TextStyle(color: Colors.white)),
-        subtitle: Text('$text', style: const TextStyle(color: Colors.white)),
+        subtitle: Text(text, style: const TextStyle(color: Colors.white)),
       ),
+      //  , )
     );
   }
 }

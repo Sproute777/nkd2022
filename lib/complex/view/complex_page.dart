@@ -12,9 +12,10 @@ class ComplexPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(create: (context) => 
-       ComplexListBloc(
-           repository: context.read<ComplexRepository>()) ,
-         child: const ComplexView());
+    return BlocProvider(
+        create: (context) =>
+            ComplexListBloc(repository: context.read<ComplexRepository>())
+              ..add(LoadComplexList()),
+        child: const ComplexView());
   }
 }
