@@ -9,25 +9,25 @@ class FourthTabPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ComplexListBloc, ComplexListState>(
       builder: (context, state) {
-        context.read<ComplexListBloc>().add(LoadComplexList());
-        if (state.status == ComplexStatus.success) {
-          // const Center(child: CircularProgressIndicator());
-
-          return ListView.builder(
-            itemCount: state.cards.length,
-            itemBuilder: (BuildContext context, int index) {
-              return state.cards[index].row == 3
-                  ? Item(
-                      id: state.cards[index].id, text: state.cards[index].text)
-                  : const SizedBox();
-            },
-          );
-        } else {
-          return Text('');
+        switch (state.status) {
+          case ComplexStatus.failure:
+            return const Center(
+              child: Text('Error'),
+            );
+          case ComplexStatus.loading:
+            return const Center(child: CircularProgressIndicator());
+          case ComplexStatus.success:
+            return ListView.builder(
+              itemCount: state.cards.length,
+              itemBuilder: (BuildContext context, int index) {
+                return state.cards[index].row == 3
+                    ? Item(
+                        id: state.cards[index].id,
+                        text: state.cards[index].text)
+                    : const SizedBox();
+              },
+            );
         }
-        // return const Center(
-        // child: Text('TEXT'),
-        // );
       },
     );
   }
