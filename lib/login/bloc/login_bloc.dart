@@ -1,11 +1,9 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:bloc_app/auth/models/auth_data.dart';
 import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
 import '../../auth/repository/auth_repository.dart';
-import '../../auth/models/models.dart';
 import '../models/models.dart';
 
 part 'login_event.dart';
@@ -14,7 +12,7 @@ part 'login_state.dart';
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc({
     required AuthRepository authRepository,
-  })   : _authRepository = authRepository,
+  })  : _authRepository = authRepository,
         super(const LoginState()) {
     on<LoginUsernameChanged>(_onUsernameChanged);
     on<LoginPasswordChanged>(_onPasswordChanged);
@@ -22,7 +20,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     on<LoginObscureChanged>(_onObscureChanged);
     on<StatusCodeChanged>(_onStatusCodeChanged);
     _subsAuthRepository = _authRepository.status.listen((data) {
-      print('status code changed ${data.code}');
       add(StatusCodeChanged(data.code));
     });
   }
@@ -36,10 +33,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     final username = Username.dirty(event.username);
     emit(state.copyWith(
       username: username,
-      status: Formz.validate([
-        state.password,
-        username
-      ]),
+      status: Formz.validate([state.password, username]),
     ));
   }
 
@@ -50,10 +44,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     final password = Password.dirty(event.password);
     emit(state.copyWith(
       password: password,
-      status: Formz.validate([
-        password,
-        state.username
-      ]),
+      status: Formz.validate([password, state.username]),
     ));
   }
 
@@ -76,7 +67,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }
 
   void _onObscureChanged(LoginObscureChanged event, Emitter<LoginState> emit) {
-    emit(event.bul == true ? state.copyWith(isObscure: false, isChecked: true) : state.copyWith(isObscure: true, isChecked: false));
+    emit(event.bul == true
+        ? state.copyWith(isObscure: false, isChecked: true)
+        : state.copyWith(isObscure: true, isChecked: false));
   }
 
   void _onStatusCodeChanged(StatusCodeChanged event, Emitter<LoginState> emit) {

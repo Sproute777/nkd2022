@@ -4,7 +4,7 @@ abstract class ComplexListEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
-//---------------------------------------------------------------------------- 
+//----------------------------------------------------------------------------
 
 class LoadComplexList extends ComplexListEvent {}
 //----------------------------------------------------------------------------
@@ -13,28 +13,19 @@ class CreateComplexItem extends ComplexListEvent {
   final int row;
   final String text;
 
-  CreateComplexItem({
-    required this.row, 
-    required this.text});
+  CreateComplexItem({required this.row, required this.text});
 
   @override
-  List<Object> get props => [ row,text];
+  List<Object> get props => [row, text];
 }
 //----------------------------------------------------------------------------
 
 class UpdateComplexItem extends ComplexListEvent {
-  final int id;
-  final int row;
-  final int seqNum;
-  final String text;
+  final Card card;
 
- UpdateComplexItem({
-    required this.id,
-    required this.row,
-    required this.seqNum,
-    required this.text,});
+  UpdateComplexItem({required this.card});
   @override
-  List<Object> get props => [id,row,seqNum, text];
+  List<Object> get props => [card];
 }
 //----------------------------------------------------------------------------
 
@@ -44,15 +35,13 @@ class DeleteComplexItem extends ComplexListEvent {
   DeleteComplexItem(this.id);
 
   @override
-  List<Object> get props => [
-        id
-      ];
+  List<Object> get props => [id];
 }
 //----------------------------------------------------------------------------
 
-class ConnectivityComplexChanged extends ComplexListEvent{
+class ConnectivityComplexChanged extends ComplexListEvent {
   ConnectivityComplexChanged(this.result);
   final ConnectivityResult result;
-  @override 
+  @override
   List<Object> get props => [result];
-} 
+}

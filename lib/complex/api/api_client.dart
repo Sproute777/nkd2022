@@ -12,69 +12,66 @@ const String klogin = '/$_kbaseApiPath/users/login/';
 const String kcards = '/$_kbaseApiPath/cards/';
 
 class ApiClient {
-  ApiClient({Dio? dio})
-      : _dio = dio ?? Dio() {
-          _dio.options
-          ..baseUrl = kbaseUrl
-          ..validateStatus = (int? status){
-           return status != null && status > 0;
-         };
-       
-       _dio.interceptors
-         ..add(InterceptorsWrapper(      
-           onResponse: (resp, handler){          
-             return handler.next(resp);
-           },        
-         ))
-         ..add(LogInterceptor(
-           responseHeader: true,
-           responseBody: true,
-         ));        
-      }
+  ApiClient({Dio? dio}) : _dio = dio ?? Dio() {
+    _dio.options
+      ..baseUrl = kbaseUrl
+      ..validateStatus = (int? status) {
+        return status != null && status > 0;
+      };
 
-  final Dio _dio ;
+    _dio.interceptors
+      ..add(InterceptorsWrapper(
+        onResponse: (resp, handler) {
+          return handler.next(resp);
+        },
+      ))
+      ..add(LogInterceptor(
+        responseHeader: true,
+        responseBody: true,
+        request: true,
+        requestBody: true,
+        requestHeader: true,
+      ));
+  }
+
+  final Dio _dio;
 
   Future<Response> get(
-     String url,{
+    String url, {
     required String token,
-    }) async {
-    
-    var response = await _dio.get(url, options: Options(
-      headers: {'Authorization': 'JWT $token'}
-    ), );
+  }) async {
+    var response = await _dio.get(
+      url,
+      options: Options(headers: {'Authorization': 'JWT $token'}),
+    );
     return response;
-
   }
 
   Future<Response> post(
-     String url,{
-    required Map<String,dynamic> data,   
+    String url, {
+    required Map<String, dynamic> data,
     required String token,
-    }) async {
-    
+  }) async {
     var response = await _dio.post(
       url,
       data: data,
-     options: Options(
-      headers: {'Authorization': 'JWT $token'}
-    ), );
+      options: Options(headers: {'Authorization': 'JWT $token'}),
+    );
     return response;
   }
 
   Future<Response> delete(
-     String url,{  
+    String url, {
     required String token,
-    }) async {
-    
+  }) async {
     var response = await _dio.delete(
       url,
-     options: Options(
-      headers: {'Authorization': 'JWT $token'}
-    ), );
+      options: Options(headers: {'Authorization': 'JWT $token'}),
+    );
     return response;
   }
 
-  void close(){
+  void close() {
     _dio.close();
   }
 }

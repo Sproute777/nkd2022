@@ -8,9 +8,7 @@ class FirstTabPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ComplexListBloc, ComplexListState>(
-        // buildWhen: (previous, current) => previous.status != current.status,
         builder: (context, state) {
-      // context.read<ComplexListBloc>().add(LoadComplexList());
       switch (state.status) {
         case ComplexStatus.failure:
           return const Center(

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../complex.dart';
 import 'complex_view.dart';
 
 class ComplexPage extends StatelessWidget {
@@ -12,10 +10,6 @@ class ComplexPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-        create: (context) =>
-            ComplexListBloc(repository: context.read<ComplexRepository>())
-              ..add(LoadComplexList()),
-        child: const ComplexView());
+    return const ComplexView();
   }
 }

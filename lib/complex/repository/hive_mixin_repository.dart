@@ -24,7 +24,7 @@ class HiveMixinRepository {
     return future;
   }
 
-  Future<int> clearHiveCards(int id) async {
+  Future<int> clearHiveCards() async {
     var box = await _cardBox;
     var future = await box.clear();
     return future;

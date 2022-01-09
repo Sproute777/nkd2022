@@ -25,6 +25,10 @@ class ComplexListState extends Equatable {
     );
   }
 
+  bool get hasConnectivity =>
+      connectivity == ConnectivityResult.mobile ||
+      connectivity == ConnectivityResult.wifi;
+
   @override
   List<Object> get props => [status, cards, connectivity];
 }

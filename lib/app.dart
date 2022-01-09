@@ -35,6 +35,10 @@ class App extends StatelessWidget {
                     authRepository: authRepository,
                     userRepository: userRepository,
                   )..add(AuthInitial())),
+          BlocProvider<ComplexListBloc>(
+            create: (_) => ComplexListBloc(repository: complexRepository)
+              ..add(LoadComplexList()),
+          ),
         ],
         child: const AppView(),
       ),
