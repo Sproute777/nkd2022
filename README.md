@@ -1,8 +1,10 @@
 Bloc advanced 
 
-Bloc , Repository, Provider => pattern 
-Dio crud api with interceptor ,
-Auth bloc with Form validation ,
+Bloc , Repository, Provider => pattern ;
+
+Dio crud api with interceptor ;
+
+Auth bloc with Form validation ;
 
 
 
