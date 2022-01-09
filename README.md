@@ -6,6 +6,7 @@ Dio crud api with interceptor ;
 
 Auth bloc with Form validation ;
 
+#bloc, #flutter_bloc, #dio, #repository, #repository_provider, #hive
 
 
 This project is a starting point for a Flutter application.
