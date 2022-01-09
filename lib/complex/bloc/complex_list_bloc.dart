@@ -30,45 +30,43 @@ class ComplexListBloc extends Bloc<ComplexListEvent, ComplexListState> {
 
   Future<void> _onLoadList(
       LoadComplexList event, Emitter<ComplexListState> emit) async {
-    final result = await _connectivity.checkConnectivity();
-    // if ( result == ConnectivityResult.wifi ||
-    //      result == ConnectivityResult.mobile )  {
-    try {
-      final _cards = await _repository.getCards();
-      print('===========Length============== ${_cards.length}');
-      if (_cards.isNotEmpty) {
-        // _repository.addHiveCards(_cards);
+    if (state.hasConnectivity) {
+      try {
+        emit(state.copyWith(status: ComplexStatus.loading));
+        final _cards = await _repository.getCards();
+        if (_cards.isNotEmpty) {
+          _repository.clearHiveCards();
+          _repository.addHiveCards(_cards);
+          return emit(
+              state.copyWith(status: ComplexStatus.success, cards: _cards));
+        }
+        _repository.clearHiveCards();
         return emit(
-            state.copyWith(status: ComplexStatus.success, cards: _cards));
+            state.copyWith(status: ComplexStatus.success, cards: <Card>[]));
+      } on Exception catch (_) {
+        emit(state.copyWith(
+          status: ComplexStatus.failure,
+        ));
       }
-      return emit(
-          state.copyWith(status: ComplexStatus.success, cards: <Card>[]));
-    } on Exception catch (_) {
-      emit(state.copyWith(
-        status: ComplexStatus.failure,
-      ));
+    } else {
+      final _cards = await _repository.fetchHiveCards();
+      if (_cards != null) {
+        emit(state.copyWith(status: ComplexStatus.success, cards: _cards));
+      }
     }
-    // }
-    //  else {
-    // final _cards = await _repository.fetchHiveCards();
-    // if(_cards != null) {
-    //    emit(state.copyWith(status: ComplexStatus.success, cards: _cards));
-
-    // }
-    // }
   }
 
   Future<void> _onCreateItem(
       CreateComplexItem event, Emitter<ComplexListState> emit) async {
-    if (state.connectivity == ConnectivityResult.none) return;
+    if (!state.hasConnectivity) return;
     emit(state.copyWith(status: ComplexStatus.loading));
-    int result = await _repository.createCard(event.row, event.text);
-    //  if ( result == 200) {
-    //    emit(state.copyWith(
-    //      status: ComplexStatus.success,
-    //      cards:  List.of(state.cards)..add(event.Card)
-    //    ));
-    //  }
+    var response = await _repository.createCard(event.row, event.text);
+    if (response.result == 201) {
+      final card = Card.fromJson(response.data);
+      emit(state.copyWith(
+          status: ComplexStatus.success,
+          cards: List.of(state.cards)..add(card)));
+    }
   }
 
   Future<void> _onConnectivityChanged(

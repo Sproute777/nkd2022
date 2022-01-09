@@ -25,8 +25,7 @@ class ComplexRepository with HiveMixinRepository {
     return <Card>[];
   }
 
-  Future<int> createCard(int row, String text) async {
-    int status = 0;
+  Future<dynamic>? createCard(int row, String text) async {
     final token = await _getToken;
     if (token != null) {
       final response = await _apiClient.post(
@@ -37,9 +36,9 @@ class ComplexRepository with HiveMixinRepository {
           'text': text,
         },
       );
-      status = response.statusCode!;
+      return response;
     }
-    return status;
+    return null;
   }
 
   Future<dynamic>? updateCard(int id, int row, int seqNum, String text) async {
