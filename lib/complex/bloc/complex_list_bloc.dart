@@ -19,8 +19,8 @@ class ComplexListBloc extends Bloc<ComplexListEvent, ComplexListState> {
         super(const ComplexListState()) {
     on<LoadComplexList>(_onLoadList);
     on<CreateComplexItem>(_onCreateItem);
-    // on<UpdateCardEvent>((event, emit) {});
-    // on<DeleteCardEvent>((event, emit) {});
+    on<UpdateComplexItem>(_onUpdateItem);
+    on<DeleteComplexItem>(_onDeleteItem);
     on<ConnectivityComplexChanged>(_onConnectivityChanged);
     _connectivitySubscription =
         _connectivity.onConnectivityChanged.listen((result) {
@@ -33,25 +33,25 @@ class ComplexListBloc extends Bloc<ComplexListEvent, ComplexListState> {
     if (state.hasConnectivity) {
       try {
         emit(state.copyWith(status: ComplexStatus.loading));
-        final _cards = await _repository.getCards();
-        if (_cards.isNotEmpty) {
-          _repository.clearHiveCards();
-          _repository.addHiveCards(_cards);
+        final _items = await _repository.getCards();
+        if (_items.isNotEmpty) {
+          _repository.clearHiveBox();
+          _repository.addAllHive(_items);
           return emit(
-              state.copyWith(status: ComplexStatus.success, cards: _cards));
+              state.copyWith(status: ComplexStatus.success, items: _items));
         }
-        _repository.clearHiveCards();
+        _repository.clearHiveBox();
         return emit(
-            state.copyWith(status: ComplexStatus.success, cards: <Card>[]));
+            state.copyWith(status: ComplexStatus.success, items: <Item>[]));
       } on Exception catch (_) {
         emit(state.copyWith(
           status: ComplexStatus.failure,
         ));
       }
     } else {
-      final _cards = await _repository.fetchHiveCards();
-      if (_cards != null) {
-        emit(state.copyWith(status: ComplexStatus.success, cards: _cards));
+      final _items = await _repository.fetchAllHive();
+      if (_items != null) {
+        emit(state.copyWith(status: ComplexStatus.success, items: _items));
       }
     }
   }
@@ -60,13 +60,35 @@ class ComplexListBloc extends Bloc<ComplexListEvent, ComplexListState> {
       CreateComplexItem event, Emitter<ComplexListState> emit) async {
     if (!state.hasConnectivity) return;
     emit(state.copyWith(status: ComplexStatus.loading));
-    var response = await _repository.createCard(event.row, event.text);
-    if (response.result == 201) {
-      final card = Card.fromJson(response.data);
-      emit(state.copyWith(
+    var json = await _repository.createCard(event.row, event.text);
+    if (json != null) {
+      final item = Item.fromJson(json as Map<String, dynamic>);
+      await _repository.addOneHive(item);
+      return emit(state.copyWith(
           status: ComplexStatus.success,
-          cards: List.of(state.cards)..add(card)));
+          items: List.of(state.items)..add(item)));
     }
+    return emit(state.copyWith(status: ComplexStatus.success));
+  }
+
+  Future<void> _onUpdateItem(
+      UpdateComplexItem event, Emitter<ComplexListState> emit) async {
+    if (!state.hasConnectivity) return;
+    emit(state.copyWith(status: ComplexStatus.loading));
+  }
+
+  Future<void> _onDeleteItem(
+      DeleteComplexItem event, Emitter<ComplexListState> emit) async {
+    if (!state.hasConnectivity) return;
+    emit(state.copyWith(status: ComplexStatus.loading));
+    var result = await _repository.deleteCard(event.id);
+    if (result == 204) {
+      _repository.deleteCard(event.id);
+      final items = List.of(state.items)
+        ..removeWhere((element) => element.id == event.id);
+      return emit(state.copyWith(status: ComplexStatus.success, items: items));
+    }
+    return emit(state.copyWith(status: ComplexStatus.success));
   }
 
   Future<void> _onConnectivityChanged(

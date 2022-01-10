@@ -21,7 +21,7 @@ class CreateComplexItem extends ComplexListEvent {
 //----------------------------------------------------------------------------
 
 class UpdateComplexItem extends ComplexListEvent {
-  final Card card;
+  final Item card;
 
   UpdateComplexItem({required this.card});
   @override

@@ -15,17 +15,17 @@ class LoginForm extends StatelessWidget {
             ScaffoldMessenger.of(context)
               ..hideCurrentSnackBar()
               ..showSnackBar(
-                 SnackBar(content: Text('failure ${state.statusCode}')),
-              );}
+                SnackBar(content: Text('failure ${state.statusCode}')),
+              );
+          }
           if (state.status.isSubmissionSuccess) {
-            if(state.statusCode == 0) return;
+            if (state.statusCode == 0) return;
             ScaffoldMessenger.of(context)
               ..hideCurrentSnackBar()
               ..showSnackBar(
-                 SnackBar(content: Text('${state.statusCode}')),
+                SnackBar(content: Text('${state.statusCode}')),
               );
           }
-        
         },
         child: Align(
             alignment: const Alignment(0, -1 / 3),
@@ -46,19 +46,20 @@ class LoginForm extends StatelessWidget {
   }
 }
 
-class _UsernameInput extends StatelessWidget {
-  String? _usernameError(BuildContext context, Username username) {
-    final error = username.displayError;
-    if (error == null) return null;
-    if (error == UsernameValidationError.empty) {
-      return "user can't be empty";
-    } else if (error == UsernameValidationError.invalid) {
-      return "validate simbols a-z, A-Z, 0-9 ";
-    } else if (error == UsernameValidationError.short) {
-      return "too short username ";
-    }
+//=================================================================================
+String? _usernameError(BuildContext context, Username username) {
+  final error = username.displayError;
+  if (error == null) return null;
+  if (error == UsernameValidationError.empty) {
+    return "user can't be empty";
+  } else if (error == UsernameValidationError.invalid) {
+    return "validate simbols a-z, A-Z, 0-9 ";
+  } else if (error == UsernameValidationError.short) {
+    return "too short username ";
   }
+}
 
+class _UsernameInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LoginBloc, LoginState>(
@@ -95,19 +96,20 @@ class _UsernameInput extends StatelessWidget {
   }
 }
 
-class _PasswordInput extends StatelessWidget {
-  String? _passwordError(BuildContext context, Password password) {
-    final error = password.displayError;
-    if (error == null) return null;
-    if (error == PasswordValidationError.empty) {
-      return "password can't be empty";
-    } else if (error == PasswordValidationError.invalid) {
-      return "valided simbols a-z, A-Z, 0-9 ";
-    } else if (error == PasswordValidationError.short) {
-      return "at least 8 characters a-z, A-Z, 0-9 ";
-    }
+// ==================================================================================
+String? _passwordError(BuildContext context, Password password) {
+  final error = password.displayError;
+  if (error == null) return null;
+  if (error == PasswordValidationError.empty) {
+    return "password can't be empty";
+  } else if (error == PasswordValidationError.invalid) {
+    return "valided simbols a-z, A-Z, 0-9 ";
+  } else if (error == PasswordValidationError.short) {
+    return "at least 8 characters a-z, A-Z, 0-9 ";
   }
+}
 
+class _PasswordInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LoginBloc, LoginState>(
@@ -147,6 +149,7 @@ class _PasswordInput extends StatelessWidget {
   }
 }
 
+// ==============================================================================
 class _LoginButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -169,6 +172,7 @@ class _LoginButton extends StatelessWidget {
   }
 }
 
+// ==============================================================================
 class _CheckBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

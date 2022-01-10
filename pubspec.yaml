@@ -21,6 +21,7 @@ dependencies:
   formz: ^0.4.1
   connectivity: ^3.0.6
   json_annotation: ^4.4.0
+  flutter_slidable: ^1.2.0
   # rxdart: ^0.27.3
 
 dev_dependencies:

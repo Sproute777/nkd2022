@@ -5,22 +5,22 @@ enum ComplexStatus { loading, success, failure }
 class ComplexListState extends Equatable {
   const ComplexListState({
     this.status = ComplexStatus.loading,
-    this.cards = const <Card>[],
+    this.items = const <Item>[],
     this.connectivity = ConnectivityResult.mobile,
   });
 
   final ComplexStatus status;
-  final List<Card> cards;
+  final List<Item> items;
   final ConnectivityResult connectivity;
 
   ComplexListState copyWith({
     ComplexStatus? status,
-    List<Card>? cards,
+    List<Item>? items,
     ConnectivityResult? connectivity,
   }) {
     return ComplexListState(
       status: status ?? this.status,
-      cards: cards ?? this.cards,
+      items: items ?? this.items,
       connectivity: connectivity ?? this.connectivity,
     );
   }
@@ -30,5 +30,5 @@ class ComplexListState extends Equatable {
       connectivity == ConnectivityResult.wifi;
 
   @override
-  List<Object> get props => [status, cards, connectivity];
+  List<Object> get props => [status, items, connectivity];
 }

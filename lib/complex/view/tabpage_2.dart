@@ -9,7 +9,6 @@ class SecondTabPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ComplexListBloc, ComplexListState>(
       builder: (context, state) {
-        context.read<ComplexListBloc>().add(LoadComplexList());
         switch (state.status) {
           case ComplexStatus.failure:
             return const Center(
@@ -20,12 +19,13 @@ class SecondTabPage extends StatelessWidget {
             return const Center(child: CircularProgressIndicator());
 
           case ComplexStatus.success:
-            var cards =
-                state.cards.where((element) => element.row == '1').toList();
+            var items =
+                state.items.where((element) => element.row == '1').toList();
             return ListView.builder(
-                itemCount: cards.length,
+                itemCount: items.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return Item(id: cards[index].id, text: cards[index].text);
+                  return ItemWidget(
+                      id: items[index].id, text: items[index].text);
                 });
         }
       },

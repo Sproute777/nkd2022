@@ -1,4 +1,4 @@
-import 'package:bloc_app/card_editor/card_editor.dart';
+import '../../item_editor/item_editor.dart';
 import 'package:bloc_app/complex/complex.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

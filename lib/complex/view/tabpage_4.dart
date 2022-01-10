@@ -18,12 +18,13 @@ class FourthTabPage extends StatelessWidget {
           case ComplexStatus.loading:
             return const Center(child: CircularProgressIndicator());
           case ComplexStatus.success:
-            var cards =
-                state.cards.where((element) => element.row == '3').toList();
+            var items =
+                state.items.where((element) => element.row == '3').toList();
             return ListView.builder(
-                itemCount: cards.length,
+                itemCount: items.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return Item(id: cards[index].id, text: cards[index].text);
+                  return ItemWidget(
+                      id: items[index].id, text: items[index].text);
                 });
         }
       },

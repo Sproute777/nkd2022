@@ -20,12 +20,16 @@ class ThirdTabPage extends StatelessWidget {
             return const Center(child: CircularProgressIndicator());
 
           case ComplexStatus.success:
-            var cards =
-                state.cards.where((element) => element.row == '2').toList();
+            var items =
+                state.items.where((element) => element.row == '2').toList();
             return ListView.builder(
-                itemCount: cards.length,
+                itemCount: items.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return Item(id: cards[index].id, text: cards[index].text);
+                  return SlidableItem(item: items[index]
+                      // onDeletePressed: () => context
+                      //     .read<ComplexListBloc>()
+                      //     .add(DeleteComplexItem(items[index].id)),
+                      );
                 });
         }
       },
