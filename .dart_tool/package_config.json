@@ -542,12 +542,6 @@
       "languageVersion": "2.12"
     },
     {
-      "name": "uuid",
-      "rootUri": "file:///C:/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/uuid-3.0.5",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
       "name": "vector_math",
       "rootUri": "file:///C:/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/vector_math-2.1.1",
       "packageUri": "lib/",
@@ -590,7 +584,7 @@
       "languageVersion": "2.14"
     }
   ],
-  "generated": "2022-01-09T20:54:22.694271Z",
+  "generated": "2022-01-10T21:27:56.677171Z",
   "generator": "pub",
   "generatorVersion": "2.15.1"
 }

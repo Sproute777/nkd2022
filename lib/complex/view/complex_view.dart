@@ -1,5 +1,6 @@
 import '../../item_editor/item_editor.dart';
 import 'package:flutter/material.dart';
+import '../complex.dart';
 import 'tabpage_1.dart';
 import 'tabpage_2.dart';
 import 'tabpage_3.dart';
@@ -73,8 +74,9 @@ class _ComplexViewState extends State<ComplexView> {
             ),
             floatingActionButton: FloatingActionButton(
               onPressed: () {
-                Navigator.of(context)
-                    .push<void>(ItemEditorPage.route(_currentTab));
+                Navigator.of(context).push<void>(ItemEditorPage.route(
+                  row: _currentTab.toString(),
+                ));
               },
               child: const Icon(Icons.add),
             ),

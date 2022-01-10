@@ -9,7 +9,7 @@ abstract class ItemEditorEvent extends Equatable {
 
 class ItemEditorRowChanged extends ItemEditorEvent {
   const ItemEditorRowChanged(this.row);
-  final int row;
+  final String row;
   @override
   List<Object> get props => [row];
 }

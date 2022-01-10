@@ -23,8 +23,9 @@ class FourthTabPage extends StatelessWidget {
             return ListView.builder(
                 itemCount: items.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return ItemWidget(
-                      id: items[index].id, text: items[index].text);
+                  return SlidableItem(
+                    item: items[index],
+                  );
                 });
         }
       },

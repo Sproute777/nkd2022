@@ -60,6 +60,19 @@ class ApiClient {
     return response;
   }
 
+  Future<Response> update(
+    String url, {
+    required Map<String, dynamic> data,
+    required String token,
+  }) async {
+    var response = await _dio.patch(
+      url,
+      data: data,
+      options: Options(headers: {'Authorization': 'JWT $token'}),
+    );
+    return response;
+  }
+
   Future<Response> delete(
     String url, {
     required String token,

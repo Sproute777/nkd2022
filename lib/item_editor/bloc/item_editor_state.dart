@@ -1,18 +1,18 @@
 part of 'item_editor_bloc.dart';
 
 class ItemEditorState extends Equatable {
-  final int row;
+  final String row;
   final ItemText text;
   final FormzStatus status;
   const ItemEditorState._({
     this.status = FormzStatus.pure,
-    this.row = 0,
+    this.row = "0",
     this.text = const ItemText.pure(),
   });
   const ItemEditorState.empty() : this._();
 
   ItemEditorState copyWith({
-    int? row,
+    String? row,
     ItemText? text,
     FormzStatus? status,
   }) {

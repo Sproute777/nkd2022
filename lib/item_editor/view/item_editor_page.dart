@@ -6,13 +6,15 @@ import '../item_editor.dart';
 import 'item_editor_form.dart';
 
 class ItemEditorPage extends StatelessWidget {
-  static Route route(int row) {
+  static Route route({
+    required String row,
+  }) {
     return MaterialPageRoute<void>(builder: (_) => ItemEditorPage(row));
   }
 
-  final int row;
-  const ItemEditorPage(this.row, {Key? key}) : super(key: key);
+  final String row;
 
+  const ItemEditorPage(this.row, {Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Material(

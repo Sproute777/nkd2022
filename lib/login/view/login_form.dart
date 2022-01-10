@@ -29,20 +29,22 @@ class LoginForm extends StatelessWidget {
         },
         child: Align(
             alignment: const Alignment(0, -1 / 3),
-            child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  _UsernameInput(),
-                  _PasswordInput(),
-                  _CheckBox(),
-                  _LoginButton()
-                ]
-                    .map((e) => Padding(
-                          padding: const EdgeInsets.only(
-                              left: 10, right: 10, bottom: 10),
-                          child: e,
-                        ))
-                    .toList())));
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    _UsernameInput(),
+                    _PasswordInput(),
+                    _CheckBox(),
+                    _LoginButton()
+                  ]
+                      .map((e) => Padding(
+                            padding: const EdgeInsets.only(bottom: 10),
+                            child: e,
+                          ))
+                      .toList()),
+            )));
   }
 }
 

@@ -33,7 +33,7 @@ class ComplexListBloc extends Bloc<ComplexListEvent, ComplexListState> {
     if (state.hasConnectivity) {
       try {
         emit(state.copyWith(status: ComplexStatus.loading));
-        final _items = await _repository.getCards();
+        final _items = await _repository.getItems();
         if (_items.isNotEmpty) {
           _repository.clearHiveBox();
           _repository.addAllHive(_items);
@@ -60,7 +60,7 @@ class ComplexListBloc extends Bloc<ComplexListEvent, ComplexListState> {
       CreateComplexItem event, Emitter<ComplexListState> emit) async {
     if (!state.hasConnectivity) return;
     emit(state.copyWith(status: ComplexStatus.loading));
-    var json = await _repository.createCard(event.row, event.text);
+    var json = await _repository.createItem(event.row, event.text);
     if (json != null) {
       final item = Item.fromJson(json as Map<String, dynamic>);
       await _repository.addOneHive(item);
@@ -75,15 +75,25 @@ class ComplexListBloc extends Bloc<ComplexListEvent, ComplexListState> {
       UpdateComplexItem event, Emitter<ComplexListState> emit) async {
     if (!state.hasConnectivity) return;
     emit(state.copyWith(status: ComplexStatus.loading));
+    var json = await _repository.updateItem(
+        id: event.id, row: event.row, seqNum: event.seqNum, text: event.text);
+    if (json != null) {
+      final item = Item.fromJson(json);
+      final items = List.of(state.items)
+        ..removeWhere((element) => element.id == item.id)
+        ..add(item);
+      return emit(state.copyWith(status: ComplexStatus.success, items: items));
+    }
+    return emit(state.copyWith(status: ComplexStatus.success));
   }
 
   Future<void> _onDeleteItem(
       DeleteComplexItem event, Emitter<ComplexListState> emit) async {
     if (!state.hasConnectivity) return;
     emit(state.copyWith(status: ComplexStatus.loading));
-    var result = await _repository.deleteCard(event.id);
+    var result = await _repository.deleteItem(event.id);
     if (result == 204) {
-      _repository.deleteCard(event.id);
+      _repository.deleteItem(event.id);
       final items = List.of(state.items)
         ..removeWhere((element) => element.id == event.id);
       return emit(state.copyWith(status: ComplexStatus.success, items: items));

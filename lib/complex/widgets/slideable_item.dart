@@ -1,3 +1,4 @@
+import 'package:bloc_app/item_update/item_update.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,10 +15,12 @@ class SlidableItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Slidable(
       endActionPane: ActionPane(
-        motion: ScrollMotion(),
+        motion: const ScrollMotion(),
         children: [
-          const SlidableAction(
-            onPressed: _editItem,
+          SlidableAction(
+            onPressed: (BuildContext context) {
+              Navigator.of(context).push(ItemUpdatePage.route(item: item));
+            },
             backgroundColor: Colors.amber,
             foregroundColor: Colors.white,
             icon: Icons.edit,

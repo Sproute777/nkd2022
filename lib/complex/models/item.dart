@@ -25,6 +25,20 @@ class Item extends HiveObject with EquatableMixin {
   factory Item.fromJson(Map<String, dynamic> json) => _$ItemFromJson(json);
   Map<String, dynamic> toJson() => _$ItemToJson(this);
 
+  Item copyWith({
+    int? id,
+    String? row,
+    int? seqNum,
+    String? text,
+  }) {
+    return Item(
+      id: id ?? this.id,
+      row: row ?? this.row,
+      seqNum: seqNum ?? this.seqNum,
+      text: text ?? this.text,
+    );
+  }
+
   @override
   List<Object> get props => [
         id,

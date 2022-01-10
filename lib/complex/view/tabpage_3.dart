@@ -25,11 +25,7 @@ class ThirdTabPage extends StatelessWidget {
             return ListView.builder(
                 itemCount: items.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return SlidableItem(item: items[index]
-                      // onDeletePressed: () => context
-                      //     .read<ComplexListBloc>()
-                      //     .add(DeleteComplexItem(items[index].id)),
-                      );
+                  return SlidableItem(item: items[index]);
                 });
         }
       },

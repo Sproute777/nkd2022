@@ -17,7 +17,6 @@ dependencies:
   flutter_bloc: ^8.0.0
   dio: ^4.0.4
   equatable: ^2.0.3
-  uuid: ^3.0.5
   formz: ^0.4.1
   connectivity: ^3.0.6
   json_annotation: ^4.4.0

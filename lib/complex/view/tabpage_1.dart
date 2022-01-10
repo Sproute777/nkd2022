@@ -26,9 +26,6 @@ class FirstTabPage extends StatelessWidget {
               itemBuilder: (BuildContext context, int index) {
                 return SlidableItem(
                   item: items[index],
-                  // onDeletePressed: () => context
-                  //     .read<ComplexListBloc>()
-                  //     .add(DeleteComplexItem(cards[index].id)),
                 );
               });
       }

@@ -10,7 +10,7 @@ class LoadComplexList extends ComplexListEvent {}
 //----------------------------------------------------------------------------
 
 class CreateComplexItem extends ComplexListEvent {
-  final int row;
+  final String row;
   final String text;
 
   CreateComplexItem({required this.row, required this.text});
@@ -21,11 +21,19 @@ class CreateComplexItem extends ComplexListEvent {
 //----------------------------------------------------------------------------
 
 class UpdateComplexItem extends ComplexListEvent {
-  final Item card;
+  final int id;
+  final String row;
+  final int seqNum;
+  final String text;
 
-  UpdateComplexItem({required this.card});
+  UpdateComplexItem({
+    required this.id,
+    required this.row,
+    required this.seqNum,
+    required this.text,
+  });
   @override
-  List<Object> get props => [card];
+  List<Object> get props => [id, row, seqNum, text];
 }
 //----------------------------------------------------------------------------
 

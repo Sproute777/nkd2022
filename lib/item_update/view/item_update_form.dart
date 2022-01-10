@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
-import '../item_editor.dart';
+import '../item_update.dart';
 
-class ItemEditorForm extends StatelessWidget {
-  const ItemEditorForm({Key? key}) : super(key: key);
+class ItemUpdateForm extends StatelessWidget {
+  final String text;
+  const ItemUpdateForm(
+    this.text, {
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +18,7 @@ class ItemEditorForm extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          _TextInput(),
+          _TextInput(text),
           Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[_ReturnButton(), _CompleteButton()])
@@ -25,6 +29,8 @@ class ItemEditorForm extends StatelessWidget {
 }
 
 class _TextInput extends StatelessWidget {
+  final String initialValue;
+  const _TextInput(this.initialValue, {Key? key}) : super(key: key);
   String? _textError(BuildContext context, ItemText cardText) {
     final error = cardText.displayError;
     if (error == null) return null;
@@ -35,12 +41,13 @@ class _TextInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ItemEditorBloc, ItemEditorState>(
+    return BlocBuilder<ItemUpdateBloc, ItemUpdateState>(
       buildWhen: (previous, current) => previous.text != current.text,
       builder: (context, state) {
         return TextFormField(
+          initialValue: initialValue,
           onChanged: (text) =>
-              context.read<ItemEditorBloc>().add(ItemEditorTextChanged(text)),
+              context.read<ItemUpdateBloc>().add(ItemUpdateTextChanged(text)),
           textAlign: TextAlign.center,
           maxLength: 100,
           maxLines: 3,
@@ -73,7 +80,7 @@ class _TextInput extends StatelessWidget {
 class _CompleteButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ItemEditorBloc, ItemEditorState>(
+    return BlocBuilder<ItemUpdateBloc, ItemUpdateState>(
       buildWhen: (previous, current) => previous.status != current.status,
       builder: (context, state) {
         return state.status.isSubmissionInProgress
@@ -82,7 +89,7 @@ class _CompleteButton extends StatelessWidget {
                 child: const Text('create'),
                 onPressed: state.status.isValidated
                     ? () {
-                        context.read<ItemEditorBloc>().add(ItemTextCompleted());
+                        context.read<ItemUpdateBloc>().add(ItemTextCompleted());
                         Navigator.of(context).pop();
                       }
                     : null,

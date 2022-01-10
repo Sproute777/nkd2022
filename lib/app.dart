@@ -8,12 +8,10 @@ import 'splash/splash_page.dart';
 
 class App extends StatelessWidget {
   final AuthRepository authRepository;
-  final UserRepository userRepository;
   final ComplexRepository complexRepository;
   const App({
     Key? key,
     required this.authRepository,
-    required this.userRepository,
     required this.complexRepository,
   }) : super(key: key);
 
@@ -33,7 +31,6 @@ class App extends StatelessWidget {
           BlocProvider<AuthBloc>(
               create: (_) => AuthBloc(
                     authRepository: authRepository,
-                    userRepository: userRepository,
                   )..add(AuthInitial())),
           BlocProvider<ComplexListBloc>(
             create: (_) => ComplexListBloc(repository: complexRepository)
