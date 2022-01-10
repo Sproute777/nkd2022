@@ -1,7 +1,5 @@
 import '../../item_editor/item_editor.dart';
-import 'package:bloc_app/complex/complex.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'tabpage_1.dart';
 import 'tabpage_2.dart';
 import 'tabpage_3.dart';
@@ -76,7 +74,7 @@ class _ComplexViewState extends State<ComplexView> {
             floatingActionButton: FloatingActionButton(
               onPressed: () {
                 Navigator.of(context)
-                    .push<void>(CardEditorPage.route(_currentTab));
+                    .push<void>(ItemEditorPage.route(_currentTab));
               },
               child: const Icon(Icons.add),
             ),

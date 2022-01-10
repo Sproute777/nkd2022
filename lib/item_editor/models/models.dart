@@ -1,1 +1,1 @@
-export 'card_text.dart';
+export 'item_text.dart';
