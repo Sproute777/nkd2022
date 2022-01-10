@@ -1,8 +1,10 @@
-# bloc_app
+Bloc advanced 
 
-A new Flutter project.
+Bloc , Repository, Provider => pattern ;
 
-## Getting Started
+Dio crud api with interceptor ;
+
+Auth bloc with Form validation ;
 
 This project is a starting point for a Flutter application.
 
