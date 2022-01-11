@@ -68,11 +68,10 @@ class _AppViewState extends State<AppView> {
                 _navigator.pushAndRemoveUntil<void>(
                     ComplexPage.route(), (route) => false);
                 break;
-              case AuthStatus.unauth:
+
+              default:
                 _navigator.pushAndRemoveUntil<void>(
                     LoginPage.route(), (route) => false);
-                break;
-              default:
                 break;
             }
           },
