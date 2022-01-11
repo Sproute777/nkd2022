@@ -71,4 +71,9 @@ class ComplexRepository with HiveMixinRepository {
     }
     return null;
   }
+
+  void close() {
+    _apiClient.close();
+    Hive.close();
+  }
 }

@@ -110,6 +110,7 @@ class ComplexListBloc extends Bloc<ComplexListEvent, ComplexListState> {
   @override
   Future<void> close() async {
     _connectivitySubscription.cancel();
+    _repository.close();
     return super.close();
   }
 }
