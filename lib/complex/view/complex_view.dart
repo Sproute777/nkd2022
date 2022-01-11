@@ -1,6 +1,8 @@
-import '../../item_editor/item_editor.dart';
 import 'package:flutter/material.dart';
-import '../complex.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../item_editor/item_editor.dart';
+import '../../auth/bloc/auth_bloc.dart';
 import 'tabpage_1.dart';
 import 'tabpage_2.dart';
 import 'tabpage_3.dart';
@@ -44,7 +46,7 @@ class _ComplexViewState extends State<ComplexView> {
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(primary: Colors.grey[900]),
                   onPressed: () {
-                    // context.read<LoginBloc>().add(Logout());
+                    context.read<AuthBloc>().add(AuthLogoutRequested());
                   },
                   child: const Icon(
                     Icons.logout,

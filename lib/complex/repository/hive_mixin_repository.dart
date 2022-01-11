@@ -2,7 +2,7 @@ import 'package:hive/hive.dart';
 import '../models/models.dart';
 
 class HiveMixinRepository {
-  Future<Box<Item>> get _cardBox async => await Hive.openBox<Item>('item_box');
+  Future<Box<Item>> get _cardBox async => await Hive.openBox<Item>('itemz_box');
 
   Future<List<Item>>? fetchAllHive() async {
     var box = await _cardBox;

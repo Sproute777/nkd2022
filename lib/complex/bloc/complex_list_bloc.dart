@@ -62,7 +62,7 @@ class ComplexListBloc extends Bloc<ComplexListEvent, ComplexListState> {
     emit(state.copyWith(status: ComplexStatus.loading));
     var json = await _repository.createItem(event.row, event.text);
     if (json != null) {
-      final item = Item.fromJson(json as Map<String, dynamic>);
+      final item = Item.fromJson(json);
       await _repository.addOneHive(item);
       return emit(state.copyWith(
           status: ComplexStatus.success,
@@ -82,6 +82,7 @@ class ComplexListBloc extends Bloc<ComplexListEvent, ComplexListState> {
       final items = List.of(state.items)
         ..removeWhere((element) => element.id == item.id)
         ..add(item);
+      _repository.addOneHive(item);
       return emit(state.copyWith(status: ComplexStatus.success, items: items));
     }
     return emit(state.copyWith(status: ComplexStatus.success));

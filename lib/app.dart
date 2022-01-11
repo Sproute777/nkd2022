@@ -29,9 +29,10 @@ class App extends StatelessWidget {
       child: MultiBlocProvider(
         providers: [
           BlocProvider<AuthBloc>(
+              lazy: false,
               create: (_) => AuthBloc(
                     authRepository: authRepository,
-                  )..add(AuthInitial())),
+                  )),
           BlocProvider<ComplexListBloc>(
             create: (_) => ComplexListBloc(repository: complexRepository)
               ..add(LoadComplexList()),

@@ -18,8 +18,9 @@ class FourthTabPage extends StatelessWidget {
           case ComplexStatus.loading:
             return const Center(child: CircularProgressIndicator());
           case ComplexStatus.success:
-            var items =
-                state.items.where((element) => element.row == '3').toList();
+            var items = state.items
+                .where((element) => element.row == ItemRow.approved)
+                .toList();
             return ListView.builder(
                 itemCount: items.length,
                 itemBuilder: (BuildContext context, int index) {

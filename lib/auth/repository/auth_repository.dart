@@ -14,17 +14,17 @@ class AuthRepository {
 
   Stream<AuthData> get status async* {
     await Future<void>.delayed(const Duration(milliseconds: 500));
-    yield const AuthData(status: AuthStatus.unauth, code: 0);
+    yield await _checkToken();
     yield* _controller.stream.asBroadcastStream();
+    _checkToken();
   }
 
-  Future<AuthStatus> checkToken() async {
-    var box = await Hive.openBox('api_box');
-    var token = box.get('token');
+  Future<AuthData> _checkToken() async {
+    var token = Hive.box('api_box').get('token');
     if (token != null) {
-      return AuthStatus.auth;
+      return const AuthData(status: AuthStatus.auth, code: 0);
     }
-    return AuthStatus.unauth;
+    return const AuthData(status: AuthStatus.unauth, code: 0);
   }
 
   Future<void> logIn({

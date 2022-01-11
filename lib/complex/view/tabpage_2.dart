@@ -19,8 +19,9 @@ class SecondTabPage extends StatelessWidget {
             return const Center(child: CircularProgressIndicator());
 
           case ComplexStatus.success:
-            var items =
-                state.items.where((element) => element.row == '1').toList();
+            var items = state.items
+                .where((element) => element.row == ItemRow.inProgress)
+                .toList();
             return ListView.builder(
                 itemCount: items.length,
                 itemBuilder: (BuildContext context, int index) {

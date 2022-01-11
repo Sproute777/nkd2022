@@ -1,0 +1,95 @@
+// **************************************************************************
+// TypeAdapterGenerator
+// **************************************************************************
+
+class ItemAdapter extends TypeAdapter<Item> {
+  @override
+  final int typeId = 1;
+
+  @override
+  Item read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return Item(
+      id: fields[0] as int,
+      row: fields[1] as ItemRow,
+      seqNum: fields[2] as int,
+      text: fields[3] as String,
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, Item obj) {
+    writer
+      ..writeByte(4)
+      ..writeByte(0)
+      ..write(obj.id)
+      ..writeByte(1)
+      ..write(obj.row)
+      ..writeByte(2)
+      ..write(obj.seqNum)
+      ..writeByte(3)
+      ..write(obj.text);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ItemAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+class ItemRowAdapter extends TypeAdapter<ItemRow> {
+  @override
+  final int typeId = 0;
+
+  @override
+  ItemRow read(BinaryReader reader) {
+    switch (reader.readByte()) {
+      case 0:
+        return ItemRow.onHold;
+      case 1:
+        return ItemRow.inProgress;
+      case 2:
+        return ItemRow.needsReview;
+      case 3:
+        return ItemRow.approved;
+      default:
+        return ItemRow.onHold;
+    }
+  }
+
+  @override
+  void write(BinaryWriter writer, ItemRow obj) {
+    switch (obj) {
+      case ItemRow.onHold:
+        writer.writeByte(0);
+        break;
+      case ItemRow.inProgress:
+        writer.writeByte(1);
+        break;
+      case ItemRow.needsReview:
+        writer.writeByte(2);
+        break;
+      case ItemRow.approved:
+        writer.writeByte(3);
+        break;
+    }
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ItemRowAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}

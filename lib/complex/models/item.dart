@@ -4,13 +4,30 @@ import 'package:hive/hive.dart';
 
 part 'item.g.dart';
 
-@JsonSerializable()
 @HiveType(typeId: 0)
+enum ItemRow {
+  @HiveField(0)
+  @JsonValue('0')
+  onHold,
+  @HiveField(1)
+  @JsonValue('1')
+  inProgress,
+  @HiveField(2)
+  @JsonValue('2')
+  needsReview,
+  @HiveField(3)
+  @JsonValue('3')
+  approved,
+}
+
+@JsonSerializable()
+@HiveType(typeId: 1)
 class Item extends HiveObject with EquatableMixin {
   @HiveField(0)
   final int id;
   @HiveField(1)
-  final String row;
+  @JsonKey(name: "row", unknownEnumValue: ItemRow.onHold)
+  final ItemRow row;
   @HiveField(2)
   @JsonKey(name: "seq_num")
   final int seqNum;
@@ -27,7 +44,7 @@ class Item extends HiveObject with EquatableMixin {
 
   Item copyWith({
     int? id,
-    String? row,
+    ItemRow? row,
     int? seqNum,
     String? text,
   }) {

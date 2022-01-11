@@ -18,27 +18,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     required AuthRepository authRepository,
   })  : _authRepository = authRepository,
         super(const AuthState.unknown()) {
-    on<AuthInitial>(_onAuthInitial);
     on<AuthDataChanged>(_onAuthDataChanged);
     on<AuthLogoutRequested>(_onAuthLogoutRequested);
     _authStatusSubscription =
         _authRepository.status.listen((repo) => add(AuthDataChanged(
               repo.status,
             )));
-  }
-
-  void _onAuthInitial(AuthInitial event, Emitter<AuthState> emit) async {
-    final status = await _authRepository.checkToken();
-    switch (status) {
-      case AuthStatus.auth:
-        emit(const AuthState.authenticated());
-        break;
-      case AuthStatus.unauth:
-        emit(const AuthState.unautheticated());
-        break;
-      default:
-        emit(const AuthState.unknown());
-    }
   }
 
   void _onAuthDataChanged(

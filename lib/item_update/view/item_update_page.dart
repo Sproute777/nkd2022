@@ -24,7 +24,7 @@ class ItemUpdatePage extends StatelessWidget {
               ItemUpdateBloc(complexListBloc: context.read<ComplexListBloc>())
                 ..add(ItemUpdateItemChanged(
                   id: item.id,
-                  row: item.row,
+                  row: item.row.index.toString(),
                   seqNum: item.seqNum,
                   text: item.text,
                 )),

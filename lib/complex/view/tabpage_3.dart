@@ -20,8 +20,9 @@ class ThirdTabPage extends StatelessWidget {
             return const Center(child: CircularProgressIndicator());
 
           case ComplexStatus.success:
-            var items =
-                state.items.where((element) => element.row == '2').toList();
+            var items = state.items
+                .where((element) => element.row == ItemRow.needsReview)
+                .toList();
             return ListView.builder(
                 itemCount: items.length,
                 itemBuilder: (BuildContext context, int index) {

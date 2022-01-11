@@ -6,6 +6,7 @@ import '../complex.dart';
 class ComplexRepository with HiveMixinRepository {
   ComplexRepository({ApiClient? apiClient})
       : _apiClient = apiClient ?? ApiClient();
+
   final ApiClient _apiClient;
 
   Future<String>? get _getToken async => await Hive.box('api_box').get('token');

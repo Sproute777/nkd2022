@@ -8,7 +8,9 @@ import 'complex/complex.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
-  Hive.registerAdapter(ItemAdapter());
+  Hive
+    ..registerAdapter(ItemRowAdapter())
+    ..registerAdapter(ItemAdapter());
   await Hive.openBox('api_box');
   runApp(App(
     complexRepository: ComplexRepository(),
