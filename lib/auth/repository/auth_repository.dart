@@ -16,7 +16,6 @@ class AuthRepository {
     await Future<void>.delayed(const Duration(milliseconds: 500));
     yield await _checkToken();
     yield* _controller.stream.asBroadcastStream();
-    _checkToken();
   }
 
   Future<AuthData> _checkToken() async {
@@ -46,7 +45,8 @@ class AuthRepository {
     }
   }
 
-  void logOut() {
+  void logOut() async {
+    await Hive.box('api_box').put('token', null);
     _controller.add(const AuthData(status: AuthStatus.unauth, code: 0));
   }
 
