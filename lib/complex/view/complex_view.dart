@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../item_editor/item_editor.dart';
 import '../../auth/bloc/auth_bloc.dart';
+import '../../item_editor/item_editor.dart';
 import 'tabpage_1.dart';
 import 'tabpage_2.dart';
 import 'tabpage_3.dart';
@@ -30,6 +31,7 @@ class _ComplexViewState extends State<ComplexView> {
 
   @override
   Widget build(BuildContext context) {
+    final language = AppLocalizations.of(context)!;
     return DefaultTabController(
         length: 4,
         child: Builder(builder: (BuildContext context) {
@@ -55,14 +57,14 @@ class _ComplexViewState extends State<ComplexView> {
                 ),
               ],
               backgroundColor: Colors.grey[900],
-              bottom: const TabBar(
+              bottom: TabBar(
                 // labelColor: Colors.white,
                 indicatorColor: Colors.white,
                 tabs: [
-                  Tab(text: 'On hold'),
-                  Tab(text: 'In progress'),
-                  Tab(text: 'Needs review'),
-                  Tab(text: 'Approved'),
+                  Tab(text: language.onHold),
+                  Tab(text: language.inProgress),
+                  Tab(text: language.needsReview),
+                  Tab(text: language.approved),
                 ],
               ),
             ),
