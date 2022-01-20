@@ -10,9 +10,6 @@ dependencies:
   flutter:
     sdk: flutter
 
-  flutter_localizations:
-    sdk: flutter 
-  intl: ^0.17.0
 
   cupertino_icons: ^1.0.2
   hive: ^2.0.5
@@ -34,7 +31,13 @@ dev_dependencies:
   flutter_lints: ^1.0.0
   build_runner: ^2.1.7
   hive_generator: ^1.1.1
+  
+  flutter_localizations:
+    sdk: flutter 
+  intl: ^0.17.0
 
+flutter_intl:
+  enabled: true
 
 flutter:
   generate: true
@@ -68,5 +71,3 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
-flutter_intl:
-  enabled: true
