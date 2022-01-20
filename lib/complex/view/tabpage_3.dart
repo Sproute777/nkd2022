@@ -9,7 +9,6 @@ class ThirdTabPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ComplexListBloc, ComplexListState>(
       builder: (context, state) {
-        // context.read<ComplexListBloc>().add(LoadComplexList());
         switch (state.status) {
           case ComplexStatus.failure:
             return const Center(

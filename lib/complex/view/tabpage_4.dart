@@ -9,14 +9,15 @@ class FourthTabPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ComplexListBloc, ComplexListState>(
       builder: (context, state) {
-        // context.read<ComplexListBloc>().add(LoadComplexList());
         switch (state.status) {
           case ComplexStatus.failure:
             return const Center(
               child: Text('Error'),
             );
+
           case ComplexStatus.loading:
             return const Center(child: CircularProgressIndicator());
+
           case ComplexStatus.success:
             var items = state.items
                 .where((element) => element.row == ItemRow.approved)
