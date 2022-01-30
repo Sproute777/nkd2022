@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:bloc_app/models/models.dart';
 import 'package:bloc_app/utils/server_exception.dart';
+import 'package:dio/dio.dart';
 import 'package:hive/hive.dart';
 import '../api/auth_api_client.dart';
 
@@ -46,7 +47,7 @@ class AuthRepository {
 
       await Hive.box('api_box').put('token', response.data['token']);
       return _controller.add(const AuthData(status: AuthStatus.auth));
-    } catch (e) {
+    } on DioError catch (e) {
       throw ServerException(error: e);
     }
   }
