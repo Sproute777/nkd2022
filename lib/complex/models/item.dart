@@ -26,7 +26,7 @@ class Item extends HiveObject with EquatableMixin {
   @HiveField(0)
   final int id;
   @HiveField(1)
-  @JsonKey(name: "row", unknownEnumValue: ItemRow.onHold)
+  @JsonKey(unknownEnumValue: ItemRow.onHold)
   final ItemRow row;
   @HiveField(2)
   @JsonKey(name: "seq_num")

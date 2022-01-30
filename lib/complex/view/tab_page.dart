@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../complex.dart';
 
-class TabPage extends StatelessWidget {
+class TabPageIndexed extends StatelessWidget {
   final int currentRow;
-  const TabPage({Key? key, required this.currentRow}) : super(key: key);
+  const TabPageIndexed({Key? key, required this.currentRow}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

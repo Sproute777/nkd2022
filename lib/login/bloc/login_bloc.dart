@@ -19,11 +19,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     on<LoginSubmitted>(_onSubmitted);
     on<LoginObscureChanged>(_onObscureChanged);
     on<StatusCodeChanged>(_onStatusCodeChanged);
-    _subsAuthRepository = _authRepository.status.listen((data) {
-      add(StatusCodeChanged(data.code));
-    });
+    // _subsAuthRepository = _authRepository.status.listen((data) {
+    //   add(StatusCodeChanged(data.code));
+    // });
   }
-  StreamSubscription? _subsAuthRepository;
+  // StreamSubscription? _subsAuthRepository;
   final AuthRepository _authRepository;
 
   void _onUsernameChanged(
@@ -78,7 +78,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   @override
   Future<void> close() async {
-    _subsAuthRepository?.cancel();
+    // _subsAuthRepository?.cancel();
     return super.close();
   }
 }

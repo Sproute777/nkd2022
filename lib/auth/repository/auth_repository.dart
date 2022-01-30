@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:bloc_app/utils/server_exception.dart';
 import 'package:hive/hive.dart';
 import '../api/auth_api_client.dart';
 import '../models/auth_data.dart';
@@ -21,33 +22,40 @@ class AuthRepository {
   Future<AuthData> _checkToken() async {
     var token = Hive.box('api_box').get('token');
     if (token != null) {
-      return const AuthData(status: AuthStatus.auth, code: 0);
+      return const AuthData(status: AuthStatus.auth);
     }
-    return const AuthData(status: AuthStatus.unauth, code: 0);
+    return const AuthData(status: AuthStatus.unauth);
   }
 
   Future<void> logIn({
     required String username,
     required String password,
   }) async {
-    final response = await _apiClient.login(
-      username: username,
-      password: password,
-    );
-    if (response.statusCode != 200) {
-      await Hive.box('api_box').put('token', null);
-      return _controller.add(
-          AuthData(status: AuthStatus.unauth, code: response.statusCode ?? 0));
-    } else {
+    try {
+      final response = await _apiClient.login(
+        username: username,
+        password: password,
+      );
+      if (response.statusCode != 200) {
+        await Hive.box('api_box').put('token', null);
+        _controller.add(const AuthData(
+          status: AuthStatus.unauth,
+        ));
+        throw ServerException(message: response.statusCode);
+      }
+
       await Hive.box('api_box').put('token', response.data['token']);
-      return _controller
-          .add(const AuthData(status: AuthStatus.auth, code: 200));
+      return _controller.add(const AuthData(status: AuthStatus.auth));
+    } catch (e) {
+      throw ServerException(error: e);
     }
   }
 
   void logOut() async {
     await Hive.box('api_box').put('token', null);
-    _controller.add(const AuthData(status: AuthStatus.unauth, code: 0));
+    _controller.add(const AuthData(
+      status: AuthStatus.unauth,
+    ));
   }
 
   void dispose() {

@@ -63,10 +63,10 @@ class _ComplexViewState extends State<ComplexView> {
             ),
             body: const TabBarView(
               children: [
-                TabPage(currentRow: 0),
-                TabPage(currentRow: 1),
-                TabPage(currentRow: 2),
-                TabPage(currentRow: 3),
+                TabPageIndexed(currentRow: 0),
+                TabPageIndexed(currentRow: 1),
+                TabPageIndexed(currentRow: 2),
+                TabPageIndexed(currentRow: 3),
               ],
             ),
             floatingActionButton: FloatingActionButton(
