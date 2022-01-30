@@ -4,16 +4,9 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../auth/bloc/auth_bloc.dart';
 import '../../item_editor/item_editor.dart';
-import 'tabpage_1.dart';
-import 'tabpage_2.dart';
-import 'tabpage_3.dart';
-import 'tabpage_4.dart';
+import 'tab_page.dart';
 
 class ComplexView extends StatefulWidget {
-  static Route route() {
-    return MaterialPageRoute<void>(builder: (_) => const ComplexView());
-  }
-
   const ComplexView({Key? key}) : super(key: key);
 
   @override
@@ -70,10 +63,10 @@ class _ComplexViewState extends State<ComplexView> {
             ),
             body: const TabBarView(
               children: [
-                FirstTabPage(),
-                SecondTabPage(),
-                ThirdTabPage(),
-                FourthTabPage(),
+                TabPage(currentRow: 0),
+                TabPage(currentRow: 1),
+                TabPage(currentRow: 2),
+                TabPage(currentRow: 3),
               ],
             ),
             floatingActionButton: FloatingActionButton(
