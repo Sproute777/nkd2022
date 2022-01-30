@@ -1,13 +1,16 @@
+import 'package:bloc_app/auth/bloc/auth_bloc.dart';
+import 'package:bloc_app/data/repository/complex_repository.dart';
+import 'package:bloc_app/data/repository/auth_repository.dart';
+import 'package:bloc_app/models/models.dart';
+import 'package:bloc_app/ui/login_page/login_page.dart';
+import 'package:bloc_app/ui/splash_page/splash_page.dart';
+import 'package:bloc_app/ui/ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-import '../auth/auth.dart';
 import '../l10n/l10n.dart';
-import '../login/login.dart';
-import '../complex/complex.dart';
-import '../splash/splash_page.dart';
 
 class App extends StatelessWidget {
   final AuthRepository authRepository;
