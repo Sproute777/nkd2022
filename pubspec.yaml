@@ -32,6 +32,7 @@ dependencies:
   flutter_slidable: ^1.2.0
   
   freezed_annotation: ^1.1.0
+  dartz: ^0.10.1
   # rxdart: ^0.27.3
 
 dev_dependencies:
