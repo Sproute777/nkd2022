@@ -2,5 +2,14 @@
     "onHold": "На расмотрении",
     "inProgress": "В процессе",
     "needsReview": "Необходим пересмотр",
-    "approved": "Одобренно"
+    "approved": "Одобренно",
+     "errorRequestCancelled": "Ошибка запрос сброшен",
+    "errorConnectionTimeout": "Ошибка время ожидания вышло",
+    "errorReceiveTimeout": "Ошибка время получения вышло",
+    "errorSendTimeout": "Ошибка время оптравки вышло ",
+    "errorInternetConnection": "Ошибка интренет подключения",
+    "errorBadRequest": "Ошибка плохой запрос ",
+    "errorRequestNotFound": "Ошибка запрос не найден",
+    "errorIntenalServer": "Ошибка интернет сервера",
+    "errorSomethingWentWrong": "Ошибка что-то пошло не так "
 }

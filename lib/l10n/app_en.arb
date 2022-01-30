@@ -2,5 +2,14 @@
     "onHold": "Oon hold",
     "inProgress": "In progress",
     "needsReview": "Needs review",
-    "approved": "Approved"
+    "approved": "Approved",
+    "errorRequestCancelled": "Error request cancelled",
+    "errorConnectionTimeout": "Error connection timout",
+    "errorReceiveTimeout": "Error receive timeout",
+    "errorSendTimeout": "Error send timeout ",
+    "errorInternetConnection": "Error internet connection",
+    "errorBadRequest": "Error bad request ",
+    "errorRequestNotFound": "Error request not found",
+    "errorIntenalServer": "Error interanal server",
+    "errorSomethingWentWrong": "Error something went wrong "
 }

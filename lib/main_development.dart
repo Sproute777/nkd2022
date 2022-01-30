@@ -1,14 +1,14 @@
 import 'dart:async';
 import 'dart:developer';
 
-import 'package:bloc_app/complex/models/item.dart';
+import 'package:bloc_app/data/repository/auth_repository.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import 'app/app.dart';
-import 'auth/repository/auth_repository.dart';
-import 'complex/repository/complex_repository.dart';
+import 'data/repository/complex_repository.dart';
+import 'models/item/item.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

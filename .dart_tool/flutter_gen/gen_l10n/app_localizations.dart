@@ -117,6 +117,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Approved'**
   String get approved;
+
+  /// No description provided for @errorRequestCancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'Error request cancelled'**
+  String get errorRequestCancelled;
+
+  /// No description provided for @errorConnectionTimeout.
+  ///
+  /// In en, this message translates to:
+  /// **'Error connection timout'**
+  String get errorConnectionTimeout;
+
+  /// No description provided for @errorReceiveTimeout.
+  ///
+  /// In en, this message translates to:
+  /// **'Error receive timeout'**
+  String get errorReceiveTimeout;
+
+  /// No description provided for @errorSendTimeout.
+  ///
+  /// In en, this message translates to:
+  /// **'Error send timeout '**
+  String get errorSendTimeout;
+
+  /// No description provided for @errorInternetConnection.
+  ///
+  /// In en, this message translates to:
+  /// **'Error internet connection'**
+  String get errorInternetConnection;
+
+  /// No description provided for @errorBadRequest.
+  ///
+  /// In en, this message translates to:
+  /// **'Error bad request '**
+  String get errorBadRequest;
+
+  /// No description provided for @errorRequestNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'Error request not found'**
+  String get errorRequestNotFound;
+
+  /// No description provided for @errorIntenalServer.
+  ///
+  /// In en, this message translates to:
+  /// **'Error interanal server'**
+  String get errorIntenalServer;
+
+  /// No description provided for @errorSomethingWentWrong.
+  ///
+  /// In en, this message translates to:
+  /// **'Error something went wrong '**
+  String get errorSomethingWentWrong;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
